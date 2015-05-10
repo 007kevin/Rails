@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
+    @user = User.create(name: "Example User", email: "USER@example.com", password: "foobar", password_confirmation: "foobar")
   end
 
   test "should be valid" do
@@ -54,6 +54,19 @@ class UserTest < ActiveSupport::TestCase
 
   test "password should have a minimum length" do
     @user.password = @user.password_confirmation = "a" * 5
+    assert_not @user.valid?
+  end
+
+  test "email addresses should be saved as lower-case" do
+    mixed_case_email = "Foo@ExAMPle.CoM"
+    @user.email = mixed_case_email
+    @user.save
+    assert_equal mixed_case_email.downcase, @user.reload.email
+  end
+
+  test "email addresses should not have double dots in email domain names" do
+    dotted_email = "foo@example..com"
+    @user.email = dotted_email
     assert_not @user.valid?
   end
 end

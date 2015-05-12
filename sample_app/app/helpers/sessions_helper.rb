@@ -18,17 +18,16 @@ module SessionsHelper
     # This technique prevents multiple unnessary queries to the database (e.g current_user method is 
     # called multiple times on a page
     # Before listing 8.36 => @current_user ||= User.find_by(id: session[:user_id])
-    def current_user
       if (user_id = session[:user_id])
         @current_user ||= User.find_by(id: user_id)
       elsif (user_id = cookies.signed[:user_id])
+       # raise # The tests still pass, so this branch is currently untested
         user = User.find_by(id: user_id)
         if user && user.authenticated?(cookies[:remember_token])
           log_in user
           @current_user = user
         end
       end
-    end
   end
 
   # Returns true if the user is logged in, false otherwise.

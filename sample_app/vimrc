@@ -27,16 +27,15 @@ nmap <CR> o<Esc>
 nmap <F7> :tabp <CR>
 nmap <F8> :tabn <CR>
 
-"Must download pathogen > NERDtree > rails.vim
-execute pathogen#infect()
 
-"Easier split navigation
+execute pathogen#infect()
+" Easier split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-"More natural split opening
+" More natural split opening
 set splitbelow
 set splitright
 
@@ -45,9 +44,7 @@ set wildignore+=*~
 set wildignore+=*.swp
 set wildignore+=*.swo
 
-
 " For Nerdtree
-" Open Nerdtree on new tab
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 

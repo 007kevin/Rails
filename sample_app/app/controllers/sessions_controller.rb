@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       log_in user
       # Will remember user if 'remember me' checkbox is selected from the login page
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+      redirect_back_or user
     else
       flash.now[:danger] = 'Invalid email/password combination' # flash.new is 
       # specifically designed for displaying flash messages on rendered pages
